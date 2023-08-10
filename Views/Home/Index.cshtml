@@ -1,0 +1,108 @@
+﻿<div class="text-center">
+    <div class="text-center body__content">
+        <h1 class="display-4 h2">Employee</h1>
+        <button id="createEmployee" class="btn btn-primary m-2" onclick="showFormCreateEmployee()">Thêm nhân viên mới</button>
+        <div class=" table-bordered">
+            @(Html.Kendo().Grid<KendoUIApp2.Models.Employee>()
+            .Name("grid")
+            .Sortable()
+            .Pageable()
+            .HtmlAttributes(new {style ="margin: auto"})
+            .ToolBar(t => t.Search())
+            .ToolBar(toolBar => toolBar.Excel())
+            .Scrollable()
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.userId).Width(100).Title("Mã Người Dùng");
+                columns.Bound(c => c.username).Width(100).Title("Tên Người Dùng");
+                columns.Bound(c => c.email).Width(100).Title("Email");
+                columns.Bound(c => c.tel).Width(200).Title("Số Điện Thoại");
+                columns.Command(command => {
+                    command.Custom("Sửa").Click("showFormUpdateEmployee").HtmlAttributes(new { @class = "btn btn-primary" });
+                    //command.Edit().HtmlAttributes(new { @class = "btn btn-primary" });
+                    command.Destroy().HtmlAttributes(new { @class = "btn btn-danger" }); })
+                .Width(200).Title("Hành Động").Width(100);
+            })
+            .Mobile()
+            .Width(1300)
+            .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+            .Search(s =>
+            {
+                s.Field(c => c.userId);
+                s.Field(c => c.username);
+            })
+            .Height(500)
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Model(model=> model.Id(e=> e.userId))
+                .ServerOperation(false)
+                //.Create(create => create.Action("create", "Home"))
+                //.Update(update=> update.Action("update", "Home"))
+                .Destroy(delete=> delete.Action("delete", "Home"))
+                .Read(read =>
+                {
+                    read.Action("Select", "Home");
+                })
+            )
+        )
+        </div>
+    </div>
+</div>
+<div>
+    @(Html.Kendo().Window().Name("Details")
+        .Title("Customer Details")
+        .Visible(false)
+        .Modal(true)
+        .Draggable(true)
+        .Width(500)
+        .Events(e =>
+        {
+            e.Close("closeWindow");
+        })
+        .Content(@<text>
+            <div id="formEmployee">
+                <div>
+                    <label id="message-validate" class="text-xxl-center text-danger d-block"></label>
+                </div>
+                <div>
+                    <label for="" class="form-label">Mã Nhân Viên</label>
+                    <input type="text" class="form-control" id="userId" aria-describedby="" onblur="checkUserIdExist()">
+                    <label id="userIdText" class="text-danger"></label>
+                </div>
+
+                <div>
+                    <label for="" class="form-label">Tên Nhân Viên</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="">
+                </div>
+
+                <div id="form_password">
+                    <label for="" id class="form-label">Mật Khẩu</label>
+                    <input type="password"  class="form-control" id="password" aria-describedby="">
+
+                    <label for="" class="form-label">Nhập Lại Mật Khẩu</label>
+                    <input type="password" class="form-control" id="passwordConfirm" aria-describedby="" onblur="checkPasswordConfirmIsTrue()">
+                    <label id="passwordConfirmText" class="text-danger"></label>
+                </div>
+
+                <div>
+                    <label for="" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" aria-describedby="">
+                </div>
+
+                <div>
+                    <label for="" class="form-label">Số Điện Thoại</label>
+                    <input type="text" class="form-control" id="tel" aria-describedby="">
+                </div>
+
+                <div class="mt-3 d-flex justify-content-between">
+                    <button class="btn btn-primary" id="btnSubmit" onclick="submit()">Lưu</button>
+                    <button class="btn btn-danger" id="btnClear" onclick="clearText()">Xóa Trắng</button>
+                </div>
+            </div>
+        </text>)
+    )
+</div>
+
+<script>
+
+</script>
