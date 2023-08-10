@@ -39,8 +39,12 @@ function reloadData() {
 }
 
 
-function validateInput() {
-    if (checkUserIdExist() && !checkPasswordConfirmIsTrue()) {
+function validateInput(feature) {
+    if (feature == "createEmployee") {
+        if (checkUserIdExist())
+            return false;
+    }
+    if (!checkPasswordConfirmIsTrue()) {
         document.getElementById('message-validate').innerHTML = "Error!"
         return false
     }
@@ -56,5 +60,4 @@ function closeWindow() {
     document.getElementById('form_password').style.display = 'block';
     document.getElementById("userId").disabled = false
     document.getElementById("userIdText").innerHTML = "";
-    wnd.close()
 }

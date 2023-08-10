@@ -20,7 +20,7 @@ namespace KendoUIApp2.Controllers
     {
 
         private IEmployeeService employeeService = new EmployeeService();
-        private EmployeeDTO employeeDTO = new EmployeeDTO();
+        private EmployeeCreateDTO employeeDTO = new EmployeeCreateDTO();
 
         // GET: Home
         public ActionResult Index()
@@ -45,7 +45,7 @@ namespace KendoUIApp2.Controllers
                     Discontinued = false
                 });
 
-            List<EmployeeDTO> employeeDTOs = new List<EmployeeDTO>();
+            List<EmployeeCreateDTO> employeeDTOs = new List<EmployeeCreateDTO>();
             employeeDTOs = employeeService.getAll();
 
             return Json(employeeDTOs.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -59,7 +59,7 @@ namespace KendoUIApp2.Controllers
         }
 
 
-        public ActionResult update([DataSourceRequest] DataSourceRequest request, EmployeeDTO employeeDTO)
+        public ActionResult update([DataSourceRequest] DataSourceRequest request, EmployeeUpdateDTO employeeDTO)
         {
             bool status = false;
             if(ModelState.IsValid)
@@ -68,7 +68,7 @@ namespace KendoUIApp2.Controllers
         }   
 
 
-        public ActionResult create([DataSourceRequest]DataSourceRequest request, EmployeeDTO employeeDTO)
+        public ActionResult create([DataSourceRequest]DataSourceRequest request, EmployeeCreateDTO employeeDTO)
         {
             bool status = false;
             if (ModelState.IsValid)
@@ -80,7 +80,7 @@ namespace KendoUIApp2.Controllers
         public ActionResult findById([DataSourceRequest] DataSourceRequest request, string userId) {
 
             employeeDTO = employeeService.findById(userId);
-            List<EmployeeDTO> employeeDTOs = new List<EmployeeDTO>();
+            List<EmployeeCreateDTO> employeeDTOs = new List<EmployeeCreateDTO>();
             employeeDTOs.Add(employeeDTO);
             return Json(employeeDTOs.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

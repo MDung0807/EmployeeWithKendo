@@ -342,7 +342,8 @@
     <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\IEmployeeDAO.cs" />
     <Compile Include="DBContex\DBMain.cs" />
-    <Compile Include="DTO\EmployeeDTO.cs" />
+    <Compile Include="DTO\EmployeeCreateDTO.cs" />
+    <Compile Include="DTO\EmployeeUpdateDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

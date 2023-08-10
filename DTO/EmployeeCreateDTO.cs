@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KendoUIApp2.DTO
 {
-    public class EmployeeDTO
+    public class EmployeeCreateDTO
     {
         [Required(ErrorMessage ="userId not null")]
         public string userId { get; set; }

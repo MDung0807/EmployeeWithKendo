@@ -16,7 +16,7 @@ namespace KendoUIApp2.Service
         {
             return employeeDAO.checkUserIdExist(userId);
         }
-        public bool create(EmployeeDTO employeeDTO)
+        public bool create(EmployeeCreateDTO employeeDTO)
         {
             Employee employee = new Employee();
             employee.userId = employeeDTO.userId.ToUpper() ;
@@ -34,10 +34,10 @@ namespace KendoUIApp2.Service
             return employeeDAO.delete(id);
         }
 
-        public EmployeeDTO findById(string id)
+        public EmployeeCreateDTO findById(string id)
         {
             Employee employee = employeeDAO.findById(id);
-            EmployeeDTO employeeDTO = new EmployeeDTO();
+            EmployeeCreateDTO employeeDTO = new EmployeeCreateDTO();
             employeeDTO.userId = employee.userId;
             employeeDTO.username = employee.username;
             employeeDTO.email = employee.email;
@@ -47,15 +47,15 @@ namespace KendoUIApp2.Service
             return employeeDTO;
         }
 
-        public List<EmployeeDTO> getAll()
+        public List<EmployeeCreateDTO> getAll()
         {
-            List<EmployeeDTO> listEmployeeDTO = new List<EmployeeDTO>();
+            List<EmployeeCreateDTO> listEmployeeDTO = new List<EmployeeCreateDTO>();
             List<Employee> listEmployee = new List<Employee>();
             listEmployee = employeeDAO.getAll();
 
             foreach(Employee item in listEmployee)
             {
-                EmployeeDTO employeeDTO= new EmployeeDTO();
+                EmployeeCreateDTO employeeDTO= new EmployeeCreateDTO();
                 employeeDTO.userId = item.userId;
                 employeeDTO.username = item.username;
                 employeeDTO.password = item.password;
@@ -67,13 +67,12 @@ namespace KendoUIApp2.Service
             return listEmployeeDTO;
         }
 
-        public bool update(EmployeeDTO employeeDTO)
+        public bool update(EmployeeUpdateDTO employeeDTO)
         {
             Employee employee = new Employee();
             employee.userId = employeeDTO.userId;
             employee.username = employeeDTO.username;
             employee.email = employeeDTO.email;
-            employee.password = employeeDTO.password;
             employee.tel = employeeDTO.tel;
             employee.disable = 0;
 

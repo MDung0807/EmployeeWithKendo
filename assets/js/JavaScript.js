@@ -64,7 +64,7 @@ function checkPasswordConfirmIsTrue() {
 async function submit() {
     var wnd = $("#Details").data("kendoWindow");
     var status
-    if (validateInput()) {
+    if (validateInput(wnd.param)) {
         var employee = {
             userId: document.getElementById("userId").value,
             username: document.getElementById("username").value,
@@ -82,6 +82,7 @@ async function submit() {
             status = await submitForm('/home/update', employee)
             if (status) {
                 closeWindow()
+                wnd.close()
             }
         }
         if (status) {

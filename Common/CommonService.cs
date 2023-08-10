@@ -2,12 +2,12 @@
 
 namespace KendoUIApp2.Common
 {
-    public interface CommonService<T>
+    public interface CommonService<T1, T2>
     {
-        bool create(T data);
-        bool update(T data);
+        bool create(T1 data);
+        bool update(T2 data);
         bool delete(string id);
-        T findById(string id);
-        List<T> getAll();
+        T1 findById(string id);
+        List<T1> getAll();
     }
 }

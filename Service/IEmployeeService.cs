@@ -3,7 +3,7 @@ using KendoUIApp2.DTO;
 
 namespace KendoUIApp2.Service
 {
-    public interface IEmployeeService : CommonService<EmployeeDTO>
+    public interface IEmployeeService : CommonService<EmployeeCreateDTO, EmployeeUpdateDTO>
     {
         bool checkUserIdExist(string userId);
     }
